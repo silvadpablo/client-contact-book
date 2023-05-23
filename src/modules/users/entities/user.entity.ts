@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Exclude } from 'class-transformer';
 import { randomUUID } from 'node:crypto';
 
@@ -6,7 +7,9 @@ export class User {
   name: string;
   email: string;
 
-  @Exclude()
+  @Exclude({
+    toPlainOnly: true
+  })
   password: string;
 
   constructor() {
