@@ -12,29 +12,29 @@ export class UsersPrismaRepository implements UsersRepository {
     constructor(private prisma: PrismaService) {}
     async create(data: CreateUserDto): Promise<User> {
         const user = new User()
-        Object.assign(User, {
+        Object.assign(user, {
             ...data
         })
-        const newUser = await this.prisma.user.create({
+        const newUser = await this.prisma.users.create({
             data: { ...user }
         })
         return plainToInstance(User, newUser)
     }
 
     async findAll(): Promise<User[]> {
-        const users: User[] = await this.prisma.user.findMany()
+        const users: User[] = await this.prisma.users.findMany()
         return plainToInstance(User, users)
     }
 
     async findOne(id: string): Promise<User> {
-        const user = await this.prisma.user.findUnique({
+        const user = await this.prisma.users.findUnique({
             where: { id }
         })
         return plainToInstance(User, user)
     }
 
     async update(id: string, data: UpdateUserDto): Promise<User> {
-        const user = await this.prisma.user.update({
+        const user = await this.prisma.users.update({
             where: { id },
             data: { ...data }
         })
@@ -42,7 +42,7 @@ export class UsersPrismaRepository implements UsersRepository {
     }
 
     async delete(id: string): Promise<void> {
-        await this.prisma.user.delete({
+        await this.prisma.users.delete({
             where: { id }
         })
     }

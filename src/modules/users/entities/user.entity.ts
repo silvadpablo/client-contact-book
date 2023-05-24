@@ -3,13 +3,11 @@ import { Exclude } from 'class-transformer';
 import { randomUUID } from 'node:crypto';
 
 export class User {
-  readonly id: string;
+  id: string;
   name: string;
   email: string;
 
-  @Exclude({
-    toPlainOnly: true
-  })
+  @Exclude()
   password: string;
 
   constructor() {
