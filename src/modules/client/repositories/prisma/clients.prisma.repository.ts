@@ -16,12 +16,7 @@ export class ClientsPrismaRepository implements ClientsRepository{
             ...data
         })
         const newClient = await this.prisma.clients.create({
-            data: {
-                ...client,
-                contacts: {
-                    create: [{...data}]
-                }
-            }
+            data: { ...client }
         })
         return plainToInstance(Client, newClient)
     }

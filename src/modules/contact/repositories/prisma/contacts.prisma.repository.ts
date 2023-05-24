@@ -17,8 +17,12 @@ export class ContactsPrismaRepository implements ContactsRepository {
         })
         const newContact = await this.prisma.contacts.create({
             data: {
-                ...contact,
-                client: {}
+                id: contact.id,
+                fullName: contact.fullName,
+                email: contact.email,
+                phone: contact.phone,
+                createdAt: contact.createdAt,
+                clientId: contact.clientId
             }
         })
         return plainToInstance(Contact, newContact)
