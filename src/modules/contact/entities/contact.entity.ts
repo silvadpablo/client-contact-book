@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 
-import { UUIDVersion } from "class-validator"
 import { Client } from "src/modules/client/entities/client.entity"
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 

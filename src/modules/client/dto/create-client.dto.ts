@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsArray, IsNotEmpty, IsString } from "class-validator";
+import { Contact } from "src/modules/contact/entities/contact.entity";
 
 export class CreateClientDto {
     @IsString()

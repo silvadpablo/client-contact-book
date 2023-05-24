@@ -19,7 +19,7 @@ export class ClientsPrismaRepository implements ClientsRepository{
             data: {
                 ...client,
                 contacts: {
-                    create: []
+                    create: [{...data}]
                 }
             }
         })
