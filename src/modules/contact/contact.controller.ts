@@ -10,10 +10,12 @@ import {
   ClassSerializerInterceptor,
   HttpCode,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './dto/create-contact.dto';
 import { UpdateContactDto } from './dto/update-contact.dto';
+import { JWTAuthGuard } from '../auth/jwt.auth.guard';
 
 @Controller('contact')
 export class ContactController {
@@ -21,24 +23,28 @@ export class ContactController {
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Post()
+  @UseGuards(JWTAuthGuard)
   create(@Body() createContactDto: CreateContactDto) {
     return this.contactService.create(createContactDto);
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
+  @UseGuards(JWTAuthGuard)
   findAll(@Query('group') group: string | undefined) {
     return this.contactService.findAll(group);
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':id')
+  @UseGuards(JWTAuthGuard)
   findOne(@Param('id') id: string) {
     return this.contactService.findOne(id);
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Patch(':id')
+  @UseGuards(JWTAuthGuard)
   update(@Param('id') id: string, @Body() updateContactDto: UpdateContactDto) {
     return this.contactService.update(id, updateContactDto);
   }
@@ -46,6 +52,7 @@ export class ContactController {
   @UseInterceptors(ClassSerializerInterceptor)
   @HttpCode(204)
   @Delete(':id')
+  @UseGuards(JWTAuthGuard)
   remove(@Param('id') id: string) {
     return this.contactService.remove(id);
   }

@@ -22,6 +22,14 @@ export class UsersService {
     return foundUser;
   }
 
+  findByEmail(email: string) {
+    const foundUser = this.usersRepository.findByEmail(email);
+    if (!foundUser) {
+      throw new NotFoundException('User not found');
+    }
+    return foundUser;
+  }
+
   update(id: string, updateUserDto: UpdateUserDto) {
     const foundUser = this.usersRepository.update(id, updateUserDto);
     if (!foundUser) {

@@ -4,8 +4,10 @@ import { ClientController } from './client.controller';
 import { PrismaService } from 'src/database/prisma.service';
 import { ClientsRepository } from './repositories/client.repository';
 import { ClientsPrismaRepository } from './repositories/prisma/clients.prisma.repository';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
+  imports: [PassportModule],
   controllers: [ClientController],
   providers: [
     ClientService,
