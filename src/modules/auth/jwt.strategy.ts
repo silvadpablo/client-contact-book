@@ -12,13 +12,13 @@ interface IPayload {
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor() {
         super({
-            jwtFormRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
             secretOrKey: process.env.SECRET_KEY
         })
     }
 
-    async validate(payload: IPayload) {
+    async validate(payload: any) {
         return { id: payload.sub, email: payload.email}
     }
 }

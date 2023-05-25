@@ -11,6 +11,7 @@ import {
   HttpCode,
   Query,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './dto/create-contact.dto';
@@ -22,10 +23,13 @@ export class ContactController {
   constructor(private readonly contactService: ContactService) {}
 
   @UseInterceptors(ClassSerializerInterceptor)
-  @Post()
+  @Post(':id')
   @UseGuards(JWTAuthGuard)
-  create(@Body() createContactDto: CreateContactDto) {
-    return this.contactService.create(createContactDto);
+  create(
+    @Body() createContactDto: CreateContactDto,
+    @Param('id') clientId: string,
+  ) {
+    return this.contactService.create(createContactDto, clientId);
   }
 
   @UseInterceptors(ClassSerializerInterceptor)

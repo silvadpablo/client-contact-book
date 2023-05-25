@@ -6,8 +6,8 @@ import { ContactsRepository } from './repositories/contact.repository';
 @Injectable()
 export class ContactService {
   constructor(private contactsRepository: ContactsRepository) {}
-  create(createcontactDto: CreateContactDto) {
-    return this.contactsRepository.create(createcontactDto);
+  create(createcontactDto: CreateContactDto, clientId: string) {
+    return this.contactsRepository.create(createcontactDto, clientId);
   }
 
   findAll(group: string | undefined) {

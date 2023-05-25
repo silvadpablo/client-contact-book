@@ -10,7 +10,7 @@ import { plainToInstance } from "class-transformer";
 @Injectable()
 export class ContactsPrismaRepository implements ContactsRepository {
     constructor(private prisma: PrismaService) {}
-    async create(data: CreateContactDto): Promise<Contact> {
+    async create(data: CreateContactDto, clientId: string): Promise<Contact> {
         const contact = new Contact()
         Object.assign(contact, {
             ...data
@@ -22,7 +22,7 @@ export class ContactsPrismaRepository implements ContactsRepository {
                 email: contact.email,
                 phone: contact.phone,
                 createdAt: contact.createdAt,
-                clientId: contact.clientId
+                clientId
             }
         })
         return plainToInstance(Contact, newContact)
