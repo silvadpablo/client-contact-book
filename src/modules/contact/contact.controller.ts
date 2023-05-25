@@ -9,6 +9,7 @@ import {
   UseInterceptors,
   ClassSerializerInterceptor,
   HttpCode,
+  Query,
 } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './dto/create-contact.dto';
@@ -26,8 +27,8 @@ export class ContactController {
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
-  findAll() {
-    return this.contactService.findAll();
+  findAll(@Query('group') group: string | undefined) {
+    return this.contactService.findAll(group);
   }
 
   @UseInterceptors(ClassSerializerInterceptor)

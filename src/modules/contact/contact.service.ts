@@ -10,8 +10,8 @@ export class ContactService {
     return this.contactsRepository.create(createcontactDto);
   }
 
-  findAll() {
-    return this.contactsRepository.findAll();
+  findAll(group: string | undefined) {
+    return this.contactsRepository.findAll(group);
   }
 
   findOne(id: string) {
