@@ -1,19 +1,16 @@
 import { StyledInput, StyledLabel } from "./styledInput";
 
-export function EmailInput () {
-    return (
-        <>
-            <StyledLabel htmlFor="userEmail">Email</StyledLabel>
-            <StyledInput type="text" id="userEmail" placeholder="Digite o email do usuário"/>
-        </>
-    )
+interface inputProps {
+    label: string
+    type: string
+    placeholder: string
 }
 
-export function PasswordInput () {
+export function CustomInput ( { label, type, placeholder }:inputProps ) {
     return (
         <>
-            <StyledLabel htmlFor="password">Password</StyledLabel>
-            <StyledInput type="password" id="password" placeholder="Digite a senha do usuário"/>
+            <StyledLabel htmlFor={label}>{label}</StyledLabel>
+            <StyledInput type={type} id={label} placeholder={placeholder}/>
         </>
     )
 }

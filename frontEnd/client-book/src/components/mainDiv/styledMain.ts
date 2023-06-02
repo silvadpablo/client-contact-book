@@ -24,4 +24,15 @@ export const StyledMainDiv = styled.main`
         text-align: center;
         border: 4px solid var(--secondary);
     }
+
+    .button {
+        padding: 7px;
+        background-color: var(--grey-2);
+        border-radius: var(--radius);
+        margin-top: 7px;
+        :hover{
+            background-color: var(--grey-4);
+            color: var(--grey-1);
+        }
+    }
 `

@@ -15,7 +15,6 @@ export const StyledClientCard = styled.div`
     
     :hover {
         cursor: pointer;
-        color: var(--grey-4);
     }
 `
 

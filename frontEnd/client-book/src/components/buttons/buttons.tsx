@@ -17,6 +17,12 @@ export function RegisterButton () {
     )
 }
 
+export function CreateButton ( { closeDialog }:any ) {
+    return (
+        <StyledGreenButton onClick={closeDialog}>Cadastrar</StyledGreenButton>
+    )
+}
+
 export function LogoutButton () {
     const navigate = useNavigate()
     function logout () {
