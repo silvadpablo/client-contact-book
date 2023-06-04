@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { UsersRepository } from "../user.repository";
 import { PrismaService } from "src/database/prisma.service";
 import { CreateUserDto } from "../../dto/create-user.dto";
@@ -11,6 +11,10 @@ import { UpdateUserDto } from "../../dto/update-user.dto";
 export class UsersPrismaRepository implements UsersRepository {
     constructor(private prisma: PrismaService) {}
     async create(data: CreateUserDto): Promise<User> {
+        const foundUser = this.findByEmail(data.email)
+        if (foundUser) {
+            throw new BadRequestException("Email already in use")
+        }
         const user = new User()
         Object.assign(user, {
             ...data
