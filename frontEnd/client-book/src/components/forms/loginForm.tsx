@@ -21,8 +21,7 @@ export function LoginForm () {
     return (
         <StyledForm className="flex flex-col" onSubmit={handleSubmit(handleLogin)} noValidate>
             <h1>Todos os seus contatos em um só lugar</h1>
-            <CustomInput register={register("name")} label="Nome" type="text" placeholder="Digite o seu nome"/>
-            {errors.name && <span>{errors.name.message}</span>}
+            <h2>Insira os dados para fazer seu login!</h2>
             <CustomInput register={register("email")} label="Email" type="text" placeholder="Digite o seu email"/>
             {errors.email && <span>{errors.email.message}</span>}
             <CustomInput register={register("password")} label="Senha" type="password" placeholder="Digite sua senha"/>

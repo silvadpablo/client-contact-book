@@ -1,8 +1,12 @@
-import { RegisterOptions } from "react-hook-form"
 import * as yup from "yup"
 
 export const LoginSchema = yup.object({
-    name: yup.string().optional(),
+    email: yup.string().required("Insira o email"),
+    password: yup.string().required("Insira a senha").min(8, "Senha deve ter pelo menos 8 caracteres")
+})
+
+export const RegisterUserSchema = yup.object({
+    name: yup.string().required("Insira o nome"),
     email: yup.string().required("Insira o email"),
     password: yup.string().required("Insira a senha").min(8, "Senha deve ter pelo menos 8 caracteres")
 })

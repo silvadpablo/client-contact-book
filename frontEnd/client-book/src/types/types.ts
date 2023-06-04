@@ -8,7 +8,6 @@ export interface iUser {
 }
 
 export interface iLoginRequest {
-    name?: string
     email: string
     password: string
 }
@@ -34,4 +33,16 @@ export interface iCustomInput {
     type: string
     placeholder: string
     register: UseFormRegisterReturn<string>
+}
+
+export interface iRegisterUserRequest {
+    name: string
+    email: string
+    password: string
+}
+
+export interface iRegisterUserResponse {
+    id: string
+    name: string
+    email: string
 }

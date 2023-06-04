@@ -1,12 +1,12 @@
 import illustration from "../assets/illustration.png"
-import { LoginForm } from "../components/forms/loginForm"
+import { RegisterForm } from "../components/forms/registerForm"
 
-export function HomePage () {
+export function RegisterPage () {
     return (
         <>
             <div className="flex justify-around items-center">
                 <div>
-                    <LoginForm/>
+                    <RegisterForm/>
                 </div>
                 <div>
                     <img src={illustration} alt="logo"/>

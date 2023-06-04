@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { iLoginRequest, iLoginResponse, iUser } from "../types/types";
+import { iLoginRequest, iLoginResponse, iRegisterUserRequest, iRegisterUserResponse, iUser } from "../types/types";
 import { api } from "../services/axios";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
@@ -8,9 +8,6 @@ import { useNavigate } from "react-router-dom";
 interface iContextProps {
     children: React.ReactNode
 }
-interface iLoginError {
-    error: string
-}
 
 interface iUserContext {
     user: iUser | undefined
@@ -18,6 +15,7 @@ interface iUserContext {
     token: string
     login: (data: iLoginRequest) => void
     logout: () => void
+    registerUser: (data: iRegisterUserRequest) => Promise<void>
 }
 
 export const userContext = createContext({} as iUserContext)
@@ -71,6 +69,26 @@ export const UserProvider = ( { children }: iContextProps ) => {
         }
     }
 
+    async function registerUser (data: iRegisterUserRequest): Promise<void> {
+        try {
+            await api.post<iRegisterUserResponse>("users/", data, {
+                headers: { "Content-Type": "application/json"}
+            })
+
+            toast.success("Usuário cadastrado com successo")
+            navigate("/")
+
+        } catch (error) {
+            const typeError = error as AxiosError<any>
+            if (typeError.response?.status !== 400) {
+                toast.error("Aconteceu algum erro")
+            } else {
+                console.log(typeError.response.data.message)
+                toast.error(typeError.response.data.message)
+            }
+        }
+    }
+
     async function logout () {
         setToken("")
         localStorage.removeItem("clientBookToken")
@@ -86,6 +104,7 @@ export const UserProvider = ( { children }: iContextProps ) => {
                 token,
                 login,
                 logout,
+                registerUser,
             }}
         >
             {children}

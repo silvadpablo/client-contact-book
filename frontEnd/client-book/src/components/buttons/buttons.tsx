@@ -14,8 +14,22 @@ export function LoginButton () {
 }
 
 export function RegisterButton () {
+    const navigate = useNavigate()
+    function handleClick() {
+        navigate("/new")
+    }
     return (
-        <StyledGreenButton>Cadastre-se</StyledGreenButton>
+        <StyledGreenButton onClick={handleClick}>Cadastre-se</StyledGreenButton>
+    )
+}
+
+export function GoBackButton () {
+    const navigate = useNavigate()
+    function handleClick () {
+        navigate("/")
+    }
+    return (
+        <StyledButton onClick={handleClick}>Voltar para o login</StyledButton>
     )
 }
 
