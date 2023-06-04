@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { StyledButton, StyledGreenButton, StyledRedButton } from "./styledButtons";
+import { useContext } from "react";
+import { userContext } from "../../contexts/userContext";
 
 interface buttonProps {
     closeDialog?(): void
@@ -36,10 +38,7 @@ export function DeleteButton ( { closeDialog }:buttonProps ) {
 }
 
 export function LogoutButton () {
-    const navigate = useNavigate()
-    function logout () {
-        navigate("/")
-    }
+    const { logout } = useContext(userContext)
     return (
         <StyledGreenButton onClick={logout}>Sair</StyledGreenButton>
     )
