@@ -1,16 +1,11 @@
+import { iCustomInput } from "../../types/types";
 import { StyledInput, StyledLabel } from "./styledInput";
 
-interface inputProps {
-    label: string
-    type: string
-    placeholder: string
-}
-
-export function CustomInput ( { label, type, placeholder }:inputProps ) {
+export function CustomInput ( { label, type, placeholder, register }:iCustomInput ) {
     return (
         <>
             <StyledLabel htmlFor={label}>{label}</StyledLabel>
-            <StyledInput type={type} id={label} placeholder={placeholder}/>
+            <StyledInput type={type} id={label} placeholder={placeholder} {...register}/>
         </>
     )
 }

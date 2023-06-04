@@ -1,6 +1,10 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { iRegisterRequest, iUpdateRequest } from "../../types/types";
 import { CreateButton, DeleteButton } from "../buttons/buttons";
 import { CustomInput } from "../inputs/inputs";
 import { StyledDialog } from "./styledDialogs";
+import { useForm } from "react-hook-form";
+import { RegisterSchema, UpdateSchema } from "../../schemas/loginSchema";
 
 interface dialogProps {
     dialogOpen: boolean
@@ -14,6 +18,13 @@ interface updateDialogProps {
 }
 
 export function CreateDialog ( { dialogOpen, setDialogOpen }: dialogProps ) {
+    const { handleSubmit, register, formState: {errors}} = useForm<iRegisterRequest>({
+        resolver: yupResolver(RegisterSchema)
+    })
+
+    // async function handleRegister (data: iLoginRequest) {
+    //     login(data)
+    // }
     function closeDialog() {
         setDialogOpen(false)
     }
@@ -25,9 +36,12 @@ export function CreateDialog ( { dialogOpen, setDialogOpen }: dialogProps ) {
                         <p onClick={closeDialog} className="close">X</p>
                     </div>
                     <div className="form flex flex-col">
-                        <CustomInput label="Nome" type="text" placeholder="Digite um nome"/>
-                        <CustomInput label="Email" type="text" placeholder="Digite um email"/>
-                        <CustomInput label="Telefone" type="text" placeholder="Digite um telefone"/>
+                        <CustomInput register={register("fullName")} label="Nome" type="text" placeholder="Digite um nome"/>
+                        {errors.fullName && <span>{errors.fullName.message}</span>}
+                        <CustomInput register={register("email")} label="Email" type="text" placeholder="Digite um email"/>
+                        {errors.email && <span>{errors.email.message}</span>}
+                        <CustomInput register={register("phone")} label="Telefone" type="text" placeholder="Digite um telefone"/>
+                        {errors.phone && <span>{errors.phone.message}</span>}
                         <CreateButton closeDialog={closeDialog}/>
                     </div>
                 </form>
@@ -36,6 +50,10 @@ export function CreateDialog ( { dialogOpen, setDialogOpen }: dialogProps ) {
 }
 
 export function UpdateDialog ( { updateDialogOpen, setUpdateDialogOpen }: updateDialogProps ) {
+    const { handleSubmit, register, formState: {errors}} = useForm<iUpdateRequest>({
+        resolver: yupResolver(UpdateSchema)
+    })
+
     function closeDialog() {
         setUpdateDialogOpen(false)
     }
@@ -47,9 +65,12 @@ export function UpdateDialog ( { updateDialogOpen, setUpdateDialogOpen }: update
                         <p onClick={closeDialog} className="close">X</p>
                     </div>
                     <div className="form flex flex-col">
-                        <CustomInput label="Nome" type="text" placeholder="Digite um nome"/>
-                        <CustomInput label="Email" type="text" placeholder="Digite um email"/>
-                        <CustomInput label="Telefone" type="text" placeholder="Digite um telefone"/>
+                    <CustomInput register={register("fullName")} label="Nome" type="text" placeholder="Digite um nome"/>
+                        {errors.fullName && <span>{errors.fullName.message}</span>}
+                        <CustomInput register={register("email")} label="Email" type="text" placeholder="Digite um email"/>
+                        {errors.email && <span>{errors.email.message}</span>}
+                        <CustomInput register={register("phone")} label="Telefone" type="text" placeholder="Digite um telefone"/>
+                        {errors.phone && <span>{errors.phone.message}</span>}
                         <CreateButton closeDialog={closeDialog}/>
                         <DeleteButton closeDialog={closeDialog}/>
                     </div>

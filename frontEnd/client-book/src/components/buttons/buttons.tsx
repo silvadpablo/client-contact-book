@@ -6,12 +6,8 @@ interface buttonProps {
 }
 
 export function LoginButton () {
-    const navigate = useNavigate()
-    function goToMain () {
-        navigate("/main")
-    }
     return (
-        <StyledButton onClick={goToMain}>Login</StyledButton>
+        <StyledButton>Login</StyledButton>
     )
 }
 
