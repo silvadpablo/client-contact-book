@@ -16,3 +16,11 @@ export const StyledGreenButton = styled(StyledButton)`
         color: var(--grey-4);
     }
 `
+
+export const StyledRedButton = styled(StyledButton)`
+    background-color: darkred;
+
+    :hover {
+        color: var(--grey-4);
+    }
+`

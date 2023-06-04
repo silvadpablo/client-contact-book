@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { StyledButton, StyledGreenButton } from "./styledButtons";
+import { StyledButton, StyledGreenButton, StyledRedButton } from "./styledButtons";
+
+interface buttonProps {
+    closeDialog?(): void
+}
 
 export function LoginButton () {
     const navigate = useNavigate()
@@ -17,9 +21,21 @@ export function RegisterButton () {
     )
 }
 
-export function CreateButton ( { closeDialog }:any ) {
+export function CreateButton ( { closeDialog }:buttonProps ) {
     return (
         <StyledGreenButton onClick={closeDialog}>Cadastrar</StyledGreenButton>
+    )
+}
+
+export function UpdateButton ( { closeDialog }:buttonProps ) {
+    return (
+        <StyledGreenButton onClick={closeDialog}>Atualizar</StyledGreenButton>
+    )
+}
+
+export function DeleteButton ( { closeDialog }:buttonProps ) {
+    return (
+        <StyledRedButton onClick={closeDialog}>Excluir</StyledRedButton>
     )
 }
 

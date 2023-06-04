@@ -16,10 +16,19 @@ export const StyledClientCard = styled.div`
     :hover {
         cursor: pointer;
     }
+
+    button {
+        border-radius: var(--radius);
+    }
 `
 
 export const StyledContactCard = styled(StyledClientCard)`
     background-color: var(--primary-2);
     width: 100%;
-    padding: 20px;
+    padding: 10px 20px;
+
+    button {
+        width: 100px;
+        margin-left: 50px;
+    }
 `

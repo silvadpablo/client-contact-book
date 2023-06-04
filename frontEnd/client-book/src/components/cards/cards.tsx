@@ -1,30 +1,38 @@
 import { useState } from "react";
-import { CreateDialog } from "../dialogs/dialogs";
+import { CreateDialog, UpdateDialog } from "../dialogs/dialogs";
 import { StyledClientCard, StyledContactCard } from "./styledCards";
 
 export function ClientCard ( ) {
-    const [dialogOpen, setDialogOpen] = useState(false)
-    function openDialog() {
-        setDialogOpen(true)
+    const [updateDialogOpen, setUpdateDialogOpen] = useState(false)
+
+    function openUpdateDialog() {
+        setUpdateDialogOpen(true)
     }
 
     return (
         <>
-            {dialogOpen && <CreateDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen}/>}
+            {updateDialogOpen && <UpdateDialog updateDialogOpen={updateDialogOpen} setUpdateDialogOpen={setUpdateDialogOpen}/>}
             <StyledClientCard className="flex flex-col">
                 <p>Pablo Diego Batista da Silva Clementino Alves Costa</p>
-                <button onClick={openDialog}>Abrir</button>
+                <button onClick={openUpdateDialog}>Abrir</button>
             </StyledClientCard>
         </>
     )
 }
 
 export function ContactCard () {
+    const [updateDialogOpen, setUpdateDialogOpen] = useState(false)
+
+    function openUpdateDialog() {
+        setUpdateDialogOpen(true)
+    }
     return (
         <StyledContactCard className="flex flex-col">
+            {updateDialogOpen && <UpdateDialog updateDialogOpen={updateDialogOpen} setUpdateDialogOpen={setUpdateDialogOpen}/>}
             <p>Pablo Diego Batista da Silva Clementino Alves Costa</p>
             <p>essemeuemailébemgrande@gmail.com.br</p>
             <p>+5583999999999</p>
+            <button onClick={openUpdateDialog}>Abrir</button>
         </StyledContactCard>
     )
 }

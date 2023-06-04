@@ -9,6 +9,15 @@ export const StyledDialog = styled.div`
     top: 0;
     left: 0;
 
+    h2 {
+        color: var(--grey-4);
+    }
+
+    button {
+        width: 100%;
+        margin: 0;
+    }
+
     label {
         text-align: left;
     }
