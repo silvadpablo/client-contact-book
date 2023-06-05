@@ -26,7 +26,8 @@ export class AuthService {
     async login(email: string){
         const foundUser = await this.userService.findByEmail(email)
         return {
-            token: this.jwtService.sign({ email }, {subject: foundUser.id})
+            token: this.jwtService.sign({ email }, {subject: foundUser.id}),
+            foundUser
         }
     }
 }

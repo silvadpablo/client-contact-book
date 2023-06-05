@@ -11,7 +11,8 @@ import { UpdateUserDto } from "../../dto/update-user.dto";
 export class UsersPrismaRepository implements UsersRepository {
     constructor(private prisma: PrismaService) {}
     async create(data: CreateUserDto): Promise<User> {
-        const foundUser = this.findByEmail(data.email)
+        const foundUser = await this.findByEmail(data.email)
+        console.log(foundUser)
         if (foundUser) {
             throw new BadRequestException("Email already in use")
         }
