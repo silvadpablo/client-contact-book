@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { CreateDialog, UpdateDialog } from "../dialogs/dialogs";
 import { StyledClientCard, StyledContactCard } from "./styledCards";
+import { iClient } from "../../types/types";
 
-export function ClientCard ( ) {
+interface iClientCard {
+    client: iClient
+}
+
+interface iContactCard {
+    showContact: () => void
+}
+export function ClientCard ( { client }: iClientCard ) {
     const [updateDialogOpen, setUpdateDialogOpen] = useState(false)
 
     function openUpdateDialog() {
@@ -13,14 +21,14 @@ export function ClientCard ( ) {
         <>
             {updateDialogOpen && <UpdateDialog updateDialogOpen={updateDialogOpen} setUpdateDialogOpen={setUpdateDialogOpen}/>}
             <StyledClientCard className="flex flex-col">
-                <p>Pablo Diego Batista da Silva Clementino Alves Costa</p>
-                <button onClick={openUpdateDialog}>Abrir</button>
+                <p>{client.fullName}</p>
+                <button onClick={openUpdateDialog}>Editar</button>
             </StyledClientCard>
         </>
     )
 }
 
-export function ContactCard () {
+export function ContactCard ( ) {
     const [updateDialogOpen, setUpdateDialogOpen] = useState(false)
 
     function openUpdateDialog() {
@@ -32,7 +40,7 @@ export function ContactCard () {
             <p>Pablo Diego Batista da Silva Clementino Alves Costa</p>
             <p>essemeuemailébemgrande@gmail.com.br</p>
             <p>+5583999999999</p>
-            <button onClick={openUpdateDialog}>Abrir</button>
+            <button onClick={openUpdateDialog}>Editar</button>
         </StyledContactCard>
     )
 }

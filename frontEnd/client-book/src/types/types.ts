@@ -7,6 +7,26 @@ export interface iUser {
     id: string
 }
 
+export interface iClient {
+    id: string
+    fullName: string
+    email: string
+    phone: string
+}
+
+export interface iContact {
+    id: string
+    fullName: string
+    email: string
+    phone: string
+    createdAt: Date
+    clientId?: string
+}
+
+export interface iContextProps {
+    children: React.ReactNode
+}
+
 export interface iLoginRequest {
     email: string
     password: string
@@ -14,6 +34,7 @@ export interface iLoginRequest {
 
 export interface iLoginResponse {
     token: string
+    foundUser: iUser
 }
 
 export interface iRegisterRequest {

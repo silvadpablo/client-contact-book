@@ -1,13 +1,10 @@
-import { createContext, useEffect, useState } from "react";
-import { iLoginRequest, iLoginResponse, iRegisterUserRequest, iRegisterUserResponse, iUser } from "../types/types";
+import { createContext, useContext, useEffect, useState } from "react";
+import { iContextProps, iLoginRequest, iLoginResponse, iRegisterUserRequest, iRegisterUserResponse, iUser } from "../types/types";
 import { api } from "../services/axios";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-
-interface iContextProps {
-    children: React.ReactNode
-}
+import { clientContext } from "./clientContext";
 
 interface iUserContext {
     user: iUser | undefined
@@ -23,6 +20,7 @@ export const userContext = createContext({} as iUserContext)
 export const UserProvider = ( { children }: iContextProps ) => {
     const [user, setUser] = useState<iUser>()
     const [token, setToken] = useState<string>("")
+    const { getClients } = useContext(clientContext)
     const [loadingPage, setLoadingPage] = useState(true)
     const navigate = useNavigate()
 
@@ -51,12 +49,11 @@ export const UserProvider = ( { children }: iContextProps ) => {
                 headers: { "Content-Type": "application/json"}
             })
             api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`
-            console.log(response.data.token)
             toast.success("Login realizado com sucesso")
-
-            // setUser(response.data.user)
             setToken(response.data.token)
+            setUser(response.data.foundUser)
             localStorage.setItem("clientBookToken", response.data.token)
+            localStorage.setItem("clientBookId", response.data.foundUser.id.toString())
             navigate("/main")
         } catch (error) {
             console.log(error)
@@ -92,6 +89,7 @@ export const UserProvider = ( { children }: iContextProps ) => {
     async function logout () {
         setToken("")
         localStorage.removeItem("clientBookToken")
+        localStorage.removeItem("clientBookId")
         toast.success("Logout realizado com sucesso")
         navigate("/")
     }

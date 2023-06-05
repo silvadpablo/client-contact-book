@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.min.css";
 import { UserProvider } from './contexts/userContext';
+import { ClientProvider } from './contexts/clientContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +17,9 @@ root.render(
     <ToastContainer position={toast.POSITION.TOP_RIGHT} autoClose={2000}/>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <ClientProvider>
+          <App />
+        </ClientProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
