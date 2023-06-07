@@ -12,6 +12,7 @@ export interface iClient {
     fullName: string
     email: string
     phone: string
+    contacts: iContact[]
 }
 
 export interface iContact {

@@ -3,15 +3,20 @@ import { ClientCard, ContactCard } from "../cards/cards";
 import { StyledMainDiv } from "./styledMain";
 import { CreateDialog } from "../dialogs/dialogs";
 import { clientContext } from "../../contexts/clientContext";
-import { iClient } from "../../types/types";
+import { iClient, iContact } from "../../types/types";
 
 export function MainDiv () {
     const [dialogOpen, setDialogOpen] = useState(false)
+    const [selectedClient, setSelectedClient] = useState<iClient>()
     const { clients } = useContext(clientContext)
+    console.log(clients)
     function openDialog() {
         setDialogOpen(true)
     }
-    // console.log(clients)
+
+    function selectClient (client: iClient) {
+        setSelectedClient(client)
+    }
 
     return (
         <>
@@ -25,7 +30,7 @@ export function MainDiv () {
                     {
                         clients ?
                         clients.map((client: iClient) => (
-                            <ClientCard client={client} key={client.id}/>
+                            <ClientCard selectClient={selectClient} client={client} key={client.id}/>
                         ))
                         :
                         <h2>Seus clientes cadastrados aparecerão aqui</h2>
@@ -37,8 +42,14 @@ export function MainDiv () {
                     <button className="button" onClick={openDialog}>Criar Novo</button>
                 </div>
                 <div className="div contactDiv flex flex-col justify-around items-center">
-                    {/* <h2>Selecione um cliente para mostrar os contatos</h2> */}
-                    <ContactCard/>
+                    {/* {
+                        selectedClient ?
+                        selectedClient.contacts.map((contact: iContact) => (
+                            <ContactCard/>
+                        ))
+                        :
+                        <h2>Selecione um cliente para mostrar os contatos</h2>
+                    } */}
                 </div>
             </StyledMainDiv>
         </>

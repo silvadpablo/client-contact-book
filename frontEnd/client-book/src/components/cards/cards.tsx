@@ -5,12 +5,13 @@ import { iClient } from "../../types/types";
 
 interface iClientCard {
     client: iClient
+    selectClient: (client: iClient) => any
 }
 
 interface iContactCard {
     showContact: () => void
 }
-export function ClientCard ( { client }: iClientCard ) {
+export function ClientCard ( { client, selectClient }: iClientCard ) {
     const [updateDialogOpen, setUpdateDialogOpen] = useState(false)
 
     function openUpdateDialog() {
@@ -20,7 +21,7 @@ export function ClientCard ( { client }: iClientCard ) {
     return (
         <>
             {updateDialogOpen && <UpdateDialog updateDialogOpen={updateDialogOpen} setUpdateDialogOpen={setUpdateDialogOpen}/>}
-            <StyledClientCard className="flex flex-col">
+            <StyledClientCard onClick={selectClient(client)} className="flex flex-col">
                 <p>{client.fullName}</p>
                 <button onClick={openUpdateDialog}>Editar</button>
             </StyledClientCard>
